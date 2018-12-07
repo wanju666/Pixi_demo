@@ -4,7 +4,7 @@
 function randomInt (min, max) {
     return Math.floor(Math.random()*(max - min + 1) + min);
 }
-
+console.log(1);
 
 /****************/
 // sprite的位置 //
