@@ -164,19 +164,46 @@ function setup () {
 /***********/
 
 // 游戏循环 //
-function setup () {
+let sprite, id, state;
 
+function setup () {
+    id = resources["**/**.**"].textures;
+    
+    sprite = new Sprite(id["**.**"]);
+    
+    sprite.y = 96;
+    
+    // 初始化vx, vy属性 //
+    sprite.vx = 0;
+    sprite.vy = 0;
+
+    app.stage.addChild(sprite);
+    
+    // 设置游戏状态 //
+    state = play;
+
+    // 开始游戏循环 //
     app.ticker.add(delta => gameLoop(delta));
 }
 
+// 更新当前游戏状态 //
 function gameLoop (delta) {
-    cat.x += 1 + delta;
+    state(delta);
+}
+
+// 每帧向右下移动 1px //
+function play (delta) {
+    sprite.vx = 1;
+    sprite.vy = 1;
+    sprite.x = sprite.vx + delta;
+    sprite.y = sprite.vy + delta;
 }
 /* 
     每当开始 游戏循环 的时候,都会为 cat 增加1px的x轴位移;
     每一个放进 ticker 的函数每秒都会执行 60 次;
     delta 的值代表帧的部分延迟,当把它添加到 cat 的位置时,让 cat 的速度和帧率无关;
 */
+
 
 
 

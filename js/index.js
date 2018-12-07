@@ -9,8 +9,10 @@
     PIXI.utils.sayHello(type)
 })()
 
-import bar from './module.js';
-bar()
+
+import randomInt from './randomInt';
+import keyboard from './keyboard';
+
 
 let Application = PIXI.Application,
     Container = PIXI.Container,
@@ -22,7 +24,7 @@ let Application = PIXI.Application,
 
 
 // new PIXI实例 //
-let app = new PIXI.Application({
+let app = new Application({
     width: 512,
     height: 512
 });
@@ -88,31 +90,11 @@ function setup () {
         blob.y = y;
         app.stage.addChild(blob);
     }
-
-    // 设置游戏状态 //
-    state = play;
-    // 游戏循环 //
-    app.ticker.add(delta => gameLoop(delta))
-    
     
 }
 
-function gameLoop (delta) {
-    state(delta);
-}
 
-function play (delta) {
-    explorer.vx = 1;
-    explorer.vy = 1;
 
-    explorer.x += 1 + delta;
-    explorer.y += 1 + delta;
-}
-
-// 随机数工具函数 //
-function randomInt (min, max) {
-    return Math.floor(Math.random()*(max - min + 1) + min);
-}
 
 
 
