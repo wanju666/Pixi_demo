@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "http-server -c-1 -p 6666"
+    "server": "http-server -c-1 -p 666"
   },
   "author": "",
   "license": "ISC",
