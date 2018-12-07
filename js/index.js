@@ -56,10 +56,71 @@ function setup () {
     );
     explorer.x = 68;
     explorer.y = app.stage.height/2 - explorer.height/2;
-    // 给精灵创建 vx 和 vy 属性,然后给他们初始值;
+    // 给精灵创建 vx 和 vy 属性,然后给他们初始值 //
     explorer.vx = 0;
     explorer.vy = 0;
     app.stage.addChild(explorer);
+
+    // 捕获键盘 箭头 键 //
+    let left = keyboard(37),
+        up = keyboard(38),
+        right = keyboard(39),
+        down = keyboard(40);
+
+    // 左箭头 press方法 //
+    left.press = ()=>{
+        explorer.vx = -5;
+        explorer.vy = 0;
+    }
+    // 左箭头 release方法 //
+    left.release = ()=>{
+        // 如果左箭头已经松开，而右箭头没有向下，explorer也没有垂直移动就停止 //
+        if (!right.isDown && explorer.vy === 0) {
+            explorer.vx = 0;
+        }
+    }
+
+    // 上箭头 press方法 //
+    up.press = ()=>{
+        explorer.vx = 0;
+        explorer.vy = -5;
+    }
+    // 上箭头 release方法 //
+    up.release = ()=>{
+        if (!down.isDown && explorer.vx === 0) {
+            explorer.vy =0;
+        }
+    }
+
+    // 右箭头 press方法 //
+    right.press = ()=>{
+        explorer.vx = 5;
+        explorer.vy = 0;
+    }
+    // 右箭头 release方法 //
+    right.release = ()=>{
+        if (!left.isDown && explorer.vy === 0) {
+            explorer.vx = 0;
+        }
+    }
+
+    // 下箭头 press方法 //
+    down.press = ()=>{
+        explorer.vx = 0;
+        explorer.vy = 5;
+    }
+    // 下箭头 release方法 //
+    down.release = ()=>{
+        if (!up.isDown && explorer.vx === 0) {
+            explorer.vy =0;
+        }
+    }
+
+    // 设置游戏状态 //
+    state = play;
+
+    // 开始游戏循环 //
+    app.ticker.add(delta => gameLoop(delta));
     
     // 定义id使用与多个函数 //
     id = resources["images/treasureHunter.json"].textures;
@@ -93,6 +154,14 @@ function setup () {
     
 }
 
+function gameLoop (delta) {
+    state(delta);
+}
+
+function play (delta) {
+    explorer.x += explorer.vx;
+    explorer.y += explorer.vy;
+}
 
 
 
