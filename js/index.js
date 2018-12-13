@@ -151,6 +151,7 @@ function setup () {
         blob.y = y;
         app.stage.addChild(blob);
     }
+
     
 }
 
