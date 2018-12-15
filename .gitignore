@@ -3,4 +3,4 @@ node_modules/
 js/index.js
 js/keyboard.js
 js/randomInt.js
-
+js/hitTest.js
