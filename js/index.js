@@ -29,9 +29,9 @@ let app = new Application({
     height: 512
 });
 
-document.body.appendChild(app.view);
-
 // app.renderer.backgroundColor = 0x061639;
+
+document.body.appendChild(app.view);
 
 loader
     .add("images/treasureHunter.json")
@@ -122,7 +122,7 @@ function setup () {
     // 开始游戏循环 //
     app.ticker.add(delta => gameLoop(delta));
     
-    // 定义id使用与多个函数 //
+    // 定义id使用于多个函数 //
     id = resources["images/treasureHunter.json"].textures;
     
     // treasure //

@@ -1,3 +1,5 @@
+import { Container } from "pixi.js";
+
 /******************/
 // 随机数函数工具 //
 /****************/
@@ -204,7 +206,79 @@ function play (delta) {
 */
 
 
+/************/
+// 精灵分组 //
+/***********/
+loader
+    .add("images/animals.json")
+    .load(setup);
 
+let id;
+
+function setup(){
+    id = resources["images/animals.json"].texture;
+
+    let cat = new Sprite(id["cat.png"]);
+    let tiger = new Sprite(id["tiger.png"]);
+    
+
+    let animals = new Container();
+    /* 高性能精灵组
+    let superFastSprites = new PIXI.particles.ParticleContainer();
+    可用属性: x, y, width, height, scale, pivot, alpha, visible;
+    它包含的精灵不能再嵌套自己的孩子精灵 */
+    animals.addChild(cat);
+    animals.addChild(tiger);
+    
+    app.stage.addChild(animals);
+    
+    // 三种获取精灵兔全局位置的方式 //
+    // tiger.parent === animals //
+    console.log(animals.toGlobal(tiger.position));
+    console.log(tiger.parent.toGlobal(tiger.position));
+    // 以上两种方式返回一个对象 //
+    // 以下方式返回Number //
+    console.log(tiger.getGlobalPosition().x);
+}
+
+
+// *********//
+// 绘制图形 //
+// ********//
+let graphics = new PIXI.Graphics;
+
+graphics.beginFill(0xff0000);
+graphics.lineStyle(4, 0x00ff00);
+// graphics.drawRect(x, y, width, height);   // 矩形
+// graphics.drawRoundedRect(x, y, width, height, cornerRadius);     // 圆角矩形
+// graphics.drawCircle(x, y, radius);   // 圆形
+// graphics.drawEllipse(x, y, width, height);    // 椭圆
+graphics.endFill();
+// graphics.position.set(x, y);
+
+app.stage.addChild(graphics);
+
+// 绘制线段 //
+let line = new PIXI.Graphics;
+line.lineStyle(4, 0xff0000);
+line.moveTo(x, y);  // 起点
+line.lineTo(x, y);  // 终点
+// line.position.set(x, y);
+app.stage.addChild(line);
+
+// 绘制多边形 //
+let triangle = new PIXI.Graphics;
+triangle.beginFill(0xff0000);
+triangle.lineStyle(4, 0x00ff00);
+triangle.drawPolygon([
+    x, y,
+    x, y,
+    x, y,
+    x, y
+]);
+triangle.endFill();
+// triangle.position.set(x, y);
+app.stage.addChild(triangle);
 
 
 
