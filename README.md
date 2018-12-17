@@ -1,5 +1,11 @@
 # Pixi_demo
 
+安装依赖
+
+npm i
+
+npm install http-server -g
+
 使用键盘方向键控制人物移动;
 
 js文件夹中为源码;
